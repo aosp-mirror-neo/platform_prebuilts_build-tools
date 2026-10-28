@@ -84,7 +84,7 @@ if [[ ${ARCH} = x86 ]]; then
     sysroot_archs="x86_64 x86 arm64 arm"
 elif [[ ${ARCH} = arm64 ]]; then
     primary_arch="\"HostArch\":\"arm64\","
-    sysroot_archs="arm64 arm"
+    sysroot_archs="arm64"
     use_musl=true
     unset build_native
     unset build_java
