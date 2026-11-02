@@ -381,7 +381,7 @@ EOF
         case $2 in
             arm) echo arm-unknown-linux-$1eabihf ;;
             arm64) echo aarch64-unknown-linux-$1 ;;
-            x86) echo i386-unknown-linux-$1 ;;
+            x86) echo i686-unknown-linux-$1 ;;
             *) echo ${arch}-unknown-linux-$1
         esac
     }
