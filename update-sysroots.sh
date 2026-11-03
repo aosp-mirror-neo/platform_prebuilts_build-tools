@@ -23,7 +23,7 @@ MUSL_TRIPLES="x86_64-unknown-linux-musl i686-unknown-linux-musl aarch64-unknown-
 for triple in ${MUSL_TRIPLES}; do
     fetch_artifact linux_musl musl-sysroot-${triple}.zip "${tmpdir}/musl-sysroot-${triple}.zip"
 done
-GLIBC_TRIPLES="x86_64-unknown-linux-gnu i386-unknown-linux-gnu aarch64-unknown-linux-gnu arm-unknown-linux-gnueabihf"
+GLIBC_TRIPLES="x86_64-unknown-linux-gnu i686-unknown-linux-gnu aarch64-unknown-linux-gnu arm-unknown-linux-gnueabihf"
 for triple in ${GLIBC_TRIPLES}; do
     fetch_artifact linux glibc-sysroot-${triple}.zip "${tmpdir}/glibc-sysroot-${triple}.zip"
 done
