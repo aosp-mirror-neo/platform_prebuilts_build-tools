@@ -87,11 +87,16 @@ prebuilt_build_tool {
             deps: ["linux-x86/lib64/libc++.so"],
             enabled: true,
         },
-        linux_musl_arm64: {
+        linux_glibc_arm64: {
             src: "linux-arm64/bin/bison",
+            deps: ["linux-arm64/lib64/libc++.so"],
+            enabled: true,
+        },
+        linux_musl_arm64: {
+            src: "linux_musl-arm64/bin/bison",
             deps: [
-                "linux-arm64/lib64/libc_musl.so",
-                "linux-arm64/lib64/libc++.so",
+                "linux_musl-arm64/lib64/libc_musl.so",
+                "linux_musl-arm64/lib64/libc++.so",
             ],
             enabled: true,
         },
@@ -113,9 +118,13 @@ prebuilt_build_tool {
             src: "linux-x86/bin/flex",
             enabled: true,
         },
-        musl_arm64: {
+        linux_glibc_arm64: {
             src: "linux-arm64/bin/flex",
-            deps: ["linux-arm64/lib64/libc_musl.so"],
+            enabled: true,
+        },
+        musl_arm64: {
+            src: "linux_musl-arm64/bin/flex",
+            deps: ["linux_musl-arm64/lib64/libc_musl.so"],
             enabled: true,
         },
     },
@@ -135,9 +144,13 @@ prebuilt_build_tool {
             src: "linux-x86/bin/m4",
             enabled: true,
         },
-        musl_arm64: {
+        linux_glibc_arm64: {
             src: "linux-arm64/bin/m4",
-            deps: ["linux-arm64/lib64/libc_musl.so"],
+            enabled: true,
+        },
+        musl_arm64: {
+            src: "linux_musl-arm64/bin/m4",
+            deps: ["linux_musl-arm64/lib64/libc_musl.so"],
             enabled: true,
         },
     },
@@ -155,11 +168,15 @@ prebuilt_build_tool {
             src: "linux-x86/bin/make",
             enabled: true,
         },
-        linux_musl_arm64: {
+        linux_glibc_arm64: {
             src: "linux-arm64/bin/make",
             enabled: true,
+        },
+        linux_musl_arm64: {
+            src: "linux_musl-arm64/bin/make",
+            enabled: true,
             deps: [
-                "linux-arm64/lib64/libc_musl.so",
+                "linux_musl-arm64/lib64/libc_musl.so",
             ],
         },
     },
@@ -176,8 +193,11 @@ cc_prebuilt_binary {
         glibc_x86_64: {
             srcs: ["linux-x86/bin/openssl"],
         },
-        musl_arm64: {
+        glibc_arm64: {
             srcs: ["linux-arm64/bin/openssl"],
+        },
+        musl_arm64: {
+            srcs: ["linux_musl-arm64/bin/openssl"],
         },
         musl_x86_64: {
             srcs: ["linux_musl-x86/bin/openssl"],
@@ -201,8 +221,11 @@ cc_prebuilt_binary {
         glibc_x86_64: {
             srcs: ["linux-x86/bin/py3-launcher64"],
         },
-        musl_arm64: {
+        glibc_arm64: {
             srcs: ["linux-arm64/bin/py3-launcher64"],
+        },
+        musl_arm64: {
+            srcs: ["linux_musl-arm64/bin/py3-launcher64"],
         },
         musl_x86_64: {
             srcs: ["linux_musl-x86/bin/py3-launcher64"],
@@ -230,8 +253,11 @@ cc_prebuilt_binary {
     compile_multilib: "64",
     stl: "none",
     target: {
-        musl_arm64: {
+        glibc_arm64: {
             srcs: ["linux-arm64/bin/py3-launcher-static64"],
+        },
+        musl_arm64: {
+            srcs: ["linux_musl-arm64/bin/py3-launcher-static64"],
         },
         musl_x86_64: {
             srcs: ["linux_musl-x86/bin/py3-launcher-static64"],
@@ -255,8 +281,11 @@ cc_prebuilt_binary {
         glibc_x86_64: {
             srcs: ["linux-x86/bin/py3-launcher-autorun64"],
         },
-        musl_arm64: {
+        glibc_arm64: {
             srcs: ["linux-arm64/bin/py3-launcher-autorun64"],
+        },
+        musl_arm64: {
+            srcs: ["linux_musl-arm64/bin/py3-launcher-autorun64"],
         },
         musl_x86_64: {
             srcs: ["linux_musl-x86/bin/py3-launcher-autorun64"],
@@ -284,8 +313,11 @@ cc_prebuilt_binary {
     compile_multilib: "64",
     stl: "none",
     target: {
-        musl_arm64: {
+        glibc_arm64: {
             srcs: ["linux-arm64/bin/py3-launcher-autorun-static64"],
+        },
+        musl_arm64: {
+            srcs: ["linux_musl-arm64/bin/py3-launcher-autorun-static64"],
         },
         musl_x86_64: {
             srcs: ["linux_musl-x86/bin/py3-launcher-autorun-static64"],
@@ -313,6 +345,9 @@ cc_prebuilt_library_headers {
         },
         linux_glibc_x86_64: {
             export_include_dirs: ["common/py3-headers/android/linux_x86_64/pyconfig"],
+        },
+        linux_glibc_arm64: {
+            export_include_dirs: ["common/py3-headers/android/linux_arm64/pyconfig"],
         },
         linux_musl_x86_64: {
             export_include_dirs: ["common/py3-headers/android/linux_x86_64/pyconfig"],
