@@ -346,12 +346,13 @@ EOF
 
     if [ -n "${build_java}" ]; then
         # Copy jars and wrappers
-        mkdir -p ${SOONG_OUT}/dist-common/{bin,flex,framework,py3-stdlib,py3-headers}
+        mkdir -p ${SOONG_OUT}/dist-common/{bin,framework}
         cp ${wrappers} ${SOONG_OUT}/dist-common/bin
         cp ${jars} ${SOONG_OUT}/dist-common/framework
     fi
 
     if [ -n "${build_native}" ]; then
+        mkdir -p ${SOONG_OUT}/dist-common/{flex,py3-stdlib,py3-headers}
         cp -r external/bison/data ${SOONG_OUT}/dist-common/bison
         cp external/bison/NOTICE ${SOONG_OUT}/dist-common/bison/
         cp -r external/flex/src/FlexLexer.h ${SOONG_OUT}/dist-common/flex/
