@@ -453,6 +453,19 @@ EOF
         cp -R ${SOONG_HOST_OUT}/lib* ${SOONG_OUT}/dist/asan/
     fi
 
+    # Add libz.so and libz.so.1 symlinks.
+    # Some tools (ziptool) expect the libz-host.so name while others
+    # (clang) expect more traditional names.
+    for dist_dir in "${SOONG_OUT}/dist" "${SOONG_OUT}/dist-arm64"; do
+        if [ -d "${dist_dir}" ]; then
+            for f in $(find "${dist_dir}" -name "libz-host.so"); do
+                dir=$(dirname "$f")
+                ln -sf libz-host.so "${dir}/libz.so"
+                ln -sf libz-host.so "${dir}/libz.so.1"
+            done
+        fi
+    done
+
     # Package arch-specific prebuilts
     ${SOONG_OUT}/dist/bin/soong_zip -o ${OUT_DIR}/build-prebuilts.zip -C ${SOONG_OUT}/dist -D ${SOONG_OUT}/dist
 
