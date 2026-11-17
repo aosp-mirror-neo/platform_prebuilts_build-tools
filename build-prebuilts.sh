@@ -239,14 +239,9 @@ EOF
         ziptool
     )
     SOONG_JAVA_LIBRARIES=(
-        desugar.jar
-        dx.jar
         javac_extractor.jar
         ktfmt.jar
         turbine.jar
-    )
-    SOONG_JAVA_WRAPPERS=(
-        dx
     )
     if [[ $OS == "linux" ]]; then
         SOONG_BINARIES+=(
@@ -271,7 +266,6 @@ EOF
     fi
     if [ -n "${build_java}" ]; then
         jars="${SOONG_JAVA_LIBRARIES[@]/#/${SOONG_HOST_OUT}/framework/}"
-        wrappers="${SOONG_JAVA_WRAPPERS[@]/#/${SOONG_HOST_OUT}/bin/}"
     fi
 
     musl_sysroots=""
@@ -304,7 +298,6 @@ EOF
         ${go_binaries} \
         ${binaries} \
         ${cross_binaries} \
-        ${wrappers} \
         ${jars} \
         ${py3_stdlib_zip} \
         ${glibc_sysroots} \
@@ -345,9 +338,8 @@ EOF
     fi
 
     if [ -n "${build_java}" ]; then
-        # Copy jars and wrappers
-        mkdir -p ${SOONG_OUT}/dist-common/{bin,framework}
-        cp ${wrappers} ${SOONG_OUT}/dist-common/bin
+        # Copy jars
+        mkdir -p ${SOONG_OUT}/dist-common/framework
         cp ${jars} ${SOONG_OUT}/dist-common/framework
     fi
 
