@@ -207,6 +207,7 @@ cc_prebuilt_binary {
         },
     },
     visibility: [
+        "//build/make/tools/otatools_package",
         "//external/avb:__subpackages__",
     ],
 }
